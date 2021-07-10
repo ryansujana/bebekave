@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\UtamaController;
+use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\ProdukController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +21,7 @@ use App\Http\Controllers\HistoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.utama');
 });
 
 Auth::routes();
@@ -35,3 +39,14 @@ Route::post('member', [MemberController::class, 'update']);
 
 Route::get('history', [HistoryController::class, 'index']);
 Route::get('history/{id}', [HistoryController::class, 'detail']);
+
+//home
+Route::get('/', [UtamaController::class, 'index']);
+Route::get('/profil', [UtamaController::class, 'profil']);
+Route::get('/kontak', [UtamaController::class, 'kontak']);
+Route::get('/gallery', [UtamaController::class, 'gallery']);
+
+//halaman admin
+Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
+
+Route::resource('/produk', ProdukController::class);

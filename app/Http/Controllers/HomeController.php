@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $telurs = Telur::paginate(20);
+        $telurs = Telur::simplePaginate(6);
         return view('home', compact('telurs'));
     }
 }

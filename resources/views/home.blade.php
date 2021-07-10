@@ -7,7 +7,7 @@
                 <img src="{{ url('assets/logo/logo.png') }}" class="rounded mx-auto d-block" width="700px" alt="">
             </div>
             @foreach ($telurs as $telur)
-                <div class="col-md-4">
+                <div class="col-md-4 mt-4">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="{{ url('assets/produk') }}/{{ $telur->gambar }}" height="250px"
                             alt="Card image cap">
@@ -26,6 +26,11 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ $telurs->links() }}
+            </div>
         </div>
     </div>
 @endsection
