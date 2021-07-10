@@ -44,6 +44,24 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <?php
+                            if (!empty(Auth::user()->id)) {
+                            $pesanan_utama = \App\Models\Pesanan::where('user_id', Auth::user()->id)
+                            ->where('status', 0)
+                            ->first();
+                            }
+                            if (!empty($pesanan_utama)) {
+                            $notif = \App\Models\PesananDetail::where('pesanan_id', $pesanan_utama->id)->count();
+                            }
+                            ?>
+                            <a class="nav-link" href="{{ url('check-out') }}">
+                                <i class="fa fa-shopping-cart"></i>
+                                @if (!empty($notif))
+                                    <span class="badge badge-danger">{{ $notif }}</span>
+                                @endif
+                            </a>
+                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -64,8 +82,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ url('member') }}">
+                                        Member
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                                                                                                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -84,6 +106,8 @@
             @yield('content')
         </main>
     </div>
+
+    @include('sweetalert::alert')
 </body>
 
 </html>

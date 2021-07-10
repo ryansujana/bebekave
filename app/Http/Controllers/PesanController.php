@@ -8,6 +8,9 @@ use App\Models\Pesanan;
 use App\Models\PesananDetail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\User;
+
 
 
 class PesanController extends Controller
@@ -84,7 +87,67 @@ class PesanController extends Controller
         $pesanan->jumlah_harga = $pesanan->jumlah_harga+$telur->harga*$request->jumlah_pesan;
         $pesanan->update();
 
-        return redirect('home');
+        Alert::success('Pesanan Berhasil Masuk Keranjang', 'Success');
+        return redirect('check-out');
+    }
+
+    public function check_out()
+    {
+
+        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status',0)->first();
+        $pesanan_details = [];
+        if(!empty($pesanan)){
+            $pesanan_details = PesananDetail::where('pesanan_id', $pesanan->id)->get();
+        }
+
+
+        return view('pesan.check_out', compact('pesanan','pesanan_details'));
+    }
+
+    public function delete($id)
+    {
+        $pesanan_detail = PesananDetail::where('id', $id)->first();
+
+        $pesanan = Pesanan::where('id', $pesanan_detail->pesanan_id)->first();
+        $pesanan->jumlah_harga = $pesanan->jumlah_harga-$pesanan_detail->jumlah_harga;
+        $pesanan->update();
+
+        $pesanan_detail->delete();
+
+        Alert::error('Pesanan Berhasil Dihapus', 'Hapus');
+        return redirect('check-out');
+    }
+
+    public function konfirmasi()
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+
+        if(empty($user->alamat))
+        {
+            Alert::error('Identitas harap dilengkapi', 'Error');
+            return redirect('member');
+        }
+
+        if(empty($user->nohp))
+        {
+            Alert::error('Identitas harap dilengkapi', 'Error');
+            return redirect('member');
+        }
+
+        $pesanan = Pesanan::where('user_id', Auth::user()->id)->where('status',0)->first();
+        $pesanan_id = $pesanan->id;
+        $pesanan->status = 1;
+        $pesanan->update();
+
+        $pesanan_details = PesananDetail::where('pesanan_id', $pesanan_id)->get();
+        foreach($pesanan_details as $pesanan_detail){
+            $telur = Telur::where('id', $pesanan_detail->telur_id)->first();
+            $telur->stok = $telur->stok-$pesanan_detail->jumlah;
+            $telur->update();
+        }
+
+        Alert::success('Pesanan Berhasil Check Out', 'Success');
+        return redirect('check-out');
     }
 
     public function create()
