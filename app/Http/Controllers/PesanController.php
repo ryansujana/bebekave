@@ -15,6 +15,11 @@ use App\Models\User;
 
 class PesanController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -54,6 +59,7 @@ class PesanController extends Controller
         $pesanan->tanggal = $tanggal;
         $pesanan->status = 0;
         $pesanan->jumlah_harga = 0;
+        $pesanan->kode = mt_rand(100, 999);
         $pesanan->save();
         }
 
@@ -146,8 +152,8 @@ class PesanController extends Controller
             $telur->update();
         }
 
-        Alert::success('Pesanan Berhasil Check Out', 'Success');
-        return redirect('check-out');
+        Alert::success('Pesanan Berhasil Check Out, silahkan lanjutkan Proses Pembayaran', 'Success');
+        return redirect('history/'.$pesanan_id);
     }
 
     public function create()

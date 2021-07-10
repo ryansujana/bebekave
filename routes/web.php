@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\HistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,6 @@ Route::get('konfirmasi-check-out', [PesanController::class, 'konfirmasi']);
 
 Route::get('member', [MemberController::class, 'index']);
 Route::post('member', [MemberController::class, 'update']);
+
+Route::get('history', [HistoryController::class, 'index']);
+Route::get('history/{id}', [HistoryController::class, 'detail']);
