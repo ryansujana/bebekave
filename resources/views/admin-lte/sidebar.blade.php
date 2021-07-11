@@ -21,7 +21,7 @@
          <div class="form-inline">
              <div class="input-group" data-widget="sidebar-search">
                  <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                     aria-label="Search">
+                 aria-label="Search">
                  <div class="input-group-append">
                      <button class="btn btn-sidebar">
                          <i class="fas fa-search fa-fw"></i>
@@ -30,13 +30,14 @@
              </div>
          </div>
 
+         @role('admin')
          <!-- Sidebar Menu -->
          <nav class="mt-2">
              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                 data-accordion="false">
+             data-accordion="false">
                  <!-- Add icons to the links using the .nav-icon class
-           with font-awesome or any other icon font library -->
-                 <li class="nav-item">
+                   with font-awesome or any other icon font library -->
+                   <li class="nav-item">
                      <a href="/beranda" class="nav-link">
                          <i class="nav-icon fas fa-tachometer-alt"></i>
                          <p>
@@ -108,20 +109,22 @@
                  <li class="nav-header">Auth User</li>
                  <li class="nav-item">
                      <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
+                     document.getElementById('logout-form').submit();">
 
-                         <i class="nav-icon fas fa-door-open"></i>
-                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                             @csrf
-                         </form>
-                         <p>
-                             Logout
-                             <!-- <span class="right badge badge-danger">New</span> -->
-                         </p>
-                     </a>
-                 </li>
+                     <i class="nav-icon fas fa-door-open"></i>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                         @csrf
+                     </form>
+                     <p>
+                         Logout
+                         <!-- <span class="right badge badge-danger">New</span> -->
+                     </p>
+                 </a>
+             </li>
 
-             </ul>
-         </nav>
-         <!-- /.sidebar-menu -->
-     </div>
+         </ul>
+     </nav>
+     <!-- /.sidebar-menu -->
+     @endrole
+
+ </div>

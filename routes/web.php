@@ -21,32 +21,48 @@ use App\Http\Controllers\ProdukController;
 */
 
 Route::get('/', function () {
-    return view('layouts.utama');
+	return view('layouts.utama');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('pesan/{id}', [PesanController::class, 'index']);
-Route::post('pesan/{id}', [PesanController::class, 'pesan']);
-Route::get('check-out', [PesanController::class, 'check_out']);
-Route::delete('check-out/{id}', [PesanController::class, 'delete']);
-
-Route::get('konfirmasi-check-out', [PesanController::class, 'konfirmasi']);
-
-Route::get('member', [MemberController::class, 'index']);
-Route::post('member', [MemberController::class, 'update']);
-
-Route::get('history', [HistoryController::class, 'index']);
-Route::get('history/{id}', [HistoryController::class, 'detail']);
-
 //home
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [UtamaController::class, 'index']);
 Route::get('/profil', [UtamaController::class, 'profil']);
 Route::get('/kontak', [UtamaController::class, 'kontak']);
 Route::get('/gallery', [UtamaController::class, 'gallery']);
 
-//halaman admin
-Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
+Route::get('/cek-role', function (){
+	if(auth()->user()->hasRole('admin')){
+		return redirect('/beranda');
+	}else{
+		return redirect('/');
+	}
+});
 
-Route::resource('/produk', ProdukController::class);
+Route::group(['middleware' => ['auth', 'role:member']], function(){
+	
+	Route::get('pesan/{id}', [PesanController::class, 'index']);
+	Route::post('pesan/{id}', [PesanController::class, 'pesan']);
+	Route::get('check-out', [PesanController::class, 'check_out']);
+	Route::delete('check-out/{id}', [PesanController::class, 'delete']);
+
+	Route::get('konfirmasi-check-out', [PesanController::class, 'konfirmasi']);
+
+	Route::get('member', [MemberController::class, 'index']);
+	Route::post('member', [MemberController::class, 'update']);
+
+	Route::get('history', [HistoryController::class, 'index']);
+	Route::get('history/{id}', [HistoryController::class, 'detail']);
+
+
+});
+
+
+//halaman admin
+Route::group(['middleware' => ['auth']], function(){
+	Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
+	Route::resource('/produk', ProdukController::class);
+});
+
