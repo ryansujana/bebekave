@@ -7,6 +7,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\UtamaController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\PenetasanController;
 
 
 /*
@@ -55,8 +56,6 @@ Route::group(['middleware' => ['auth', 'role:member']], function(){
 
 	Route::get('history', [HistoryController::class, 'index']);
 	Route::get('history/{id}', [HistoryController::class, 'detail']);
-
-
 });
 
 
@@ -64,5 +63,6 @@ Route::group(['middleware' => ['auth', 'role:member']], function(){
 Route::group(['middleware' => ['auth']], function(){
 	Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 	Route::resource('/produk', ProdukController::class);
+	Route::resource('/penetasan', PenetasanController::class);
 });
 

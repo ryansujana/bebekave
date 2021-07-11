@@ -1,57 +1,57 @@
 @extends('admin-lte/app')
-@section('title', 'Produk')
+@section('title', 'Data Produk')
 @section('content')
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
 
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                            </button>
                         </div>
                     </div>
-                    <br>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
-                        Tambah Produk
-                    </button>
                 </div>
+                <br>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
+                    Tambah Produk
+                </button>
+            </div>
 
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>Gambar</th>
-                                <th>Harga</th>
-                                <th>Stok</th>
-                                <th>Keterangan</th>
-                                <th>Aksi</th>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Gambar</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Keterangan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($telurs as $telur)
+                        <tr>
+                            <td>{{ $telur->nama_telur }}</td>
+                            <td>
+                                <img src="{{ url('assets/produk') }}/{{ $telur->gambar }}"
+                                style="width:80px; height:80px" alt="">
+                            </td>
+                            <td>Rp. {{ number_format($telur->harga) }}</td>
+                            <td>{{ $telur->stok }}</td>
+                            <td>{{ $telur->keterangan }}</td>
+                            <td>
+                                <a href="/produk/{{ $telur->id }}/edit" class="btn btn-warning btn-sm"><i
+                                    class="fas fa-edit"></i> Edit</a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($telurs as $telur)
-                                <tr>
-                                    <td>{{ $telur->nama_telur }}</td>
-                                    <td>
-                                        <img src="{{ url('assets/produk') }}/{{ $telur->gambar }}"
-                                            style="width:80px; height:80px" alt="">
-                                    </td>
-                                    <td>{{ $telur->harga }}</td>
-                                    <td>{{ $telur->stok }}</td>
-                                    <td>{{ $telur->keterangan }}</td>
-                                    <td>
-                                        <a href="/produk/{{ $telur->id }}/edit" class="btn btn-warning btn-sm"><i
-                                                class="fas fa-edit"></i> Edit</a>
-                                    </td>
-                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -92,13 +92,13 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Keterangan</label>
                             <input type="text" name="keterangan" class="form-control" id="keterangan"
-                                placeholder="keterangan">
+                            placeholder="keterangan">
                         </div>
 
                         <div class="form-group">
                             <label for="gambar" class="form-control-label">Gambar</label>
                             <input type="file" name="gambar" class="form-control" value="{{ old('gambar') }}" id="sampul"
-                                aria-describedby="emailHelp">
+                            aria-describedby="emailHelp">
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -114,4 +114,4 @@
     </div>
     <!-- /.modal -->
 
-@endsection
+    @endsection
