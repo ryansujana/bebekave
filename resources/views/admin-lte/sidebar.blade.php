@@ -66,74 +66,89 @@
 
                    <li class="nav-header">Master Data</li>
                    <li class="nav-item">
-                     <a href="../widgets.html" class="nav-link">
+                     <a href="#" class="nav-link">
                        <i class="nav-icon fas fa-users"></i>
                        <p>
                          Data User
-                         <!-- <span class="right badge badge-danger">New</span> -->
+                         <i class="right fas fa-angle-left"></i>
                        </p>
                      </a>
-                   </li>
+                     <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                        <a href="{{ url('list-admin') }}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Data Admin</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{{ url('list-member') }}" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Data Member</p>
+                        </a>
+                      </li>
 
-                   <li class="nav-item">
-                     <a href="../widgets.html" class="nav-link">
-                       <i class="nav-icon fas fa-edit"></i>
-                       <p>
-                         Data Stok Produk
-                         <!-- <span class="right badge badge-danger">New</span> -->
-                       </p>
-                     </a>
-                   </li>
-
-                   <li class="nav-header">Laporan</li>
-                   <li class="nav-item">
-                     <a href="../widgets.html" class="nav-link">
-                       <i class="nav-icon fas fa-users"></i>
-                       <p>
-                         Laporan Transaksi
-                         <!-- <span class="right badge badge-danger">New</span> -->
-                       </p>
-                     </a>
-                   </li>
-
-                   <li class="nav-item">
-                     <a href="../widgets.html" class="nav-link">
-                       <i class="nav-icon fas fa-edit"></i>
-                       <p>
-                         Laporan Stok
-                         <!-- <span class="right badge badge-danger">New</span> -->
-                       </p>
-                     </a>
-                   </li>
-
-                   <li class="nav-header">Auth User</li>
-                   <li class="nav-item">
-                    <a href="{{ url('/') }}" class="nav-link">
-                      <i class="nav-icon fas fa-home"></i>
-                      <p>
-                        Halaman Utama
-                        <!-- <span class="right badge badge-danger">New</span> -->
-                      </p>
-                    </a>
+                    </ul>
                   </li>
+
                   <li class="nav-item">
-                   <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
-                   document.getElementById('logout-form').submit();">
+                   <a href="../widgets.html" class="nav-link">
+                     <i class="nav-icon fas fa-edit"></i>
+                     <p>
+                       Data Stok Produk
+                       <!-- <span class="right badge badge-danger">New</span> -->
+                     </p>
+                   </a>
+                 </li>
 
-                   <i class="nav-icon fas fa-door-open"></i>
-                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                     @csrf
-                   </form>
-                   <p>
-                     Logout
-                     <!-- <span class="right badge badge-danger">New</span> -->
-                   </p>
-                 </a>
-               </li>
+                 <li class="nav-header">Laporan</li>
+                 <li class="nav-item">
+                   <a href="../widgets.html" class="nav-link">
+                     <i class="nav-icon fas fa-users"></i>
+                     <p>
+                       Laporan Transaksi
+                       <!-- <span class="right badge badge-danger">New</span> -->
+                     </p>
+                   </a>
+                 </li>
 
-             </ul>
-           </nav>
-           <!-- /.sidebar-menu -->
-           @endrole
+                 <li class="nav-item">
+                   <a href="../widgets.html" class="nav-link">
+                     <i class="nav-icon fas fa-edit"></i>
+                     <p>
+                       Laporan Stok
+                       <!-- <span class="right badge badge-danger">New</span> -->
+                     </p>
+                   </a>
+                 </li>
 
-         </div>
+                 <li class="nav-header">Auth User</li>
+                 <li class="nav-item">
+                  <a href="{{ url('/') }}" class="nav-link">
+                    <i class="nav-icon fas fa-home"></i>
+                    <p>
+                      Halaman Utama
+                      <!-- <span class="right badge badge-danger">New</span> -->
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                 <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+                 document.getElementById('logout-form').submit();">
+
+                 <i class="nav-icon fas fa-door-open"></i>
+                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                   @csrf
+                 </form>
+                 <p>
+                   Logout
+                   <!-- <span class="right badge badge-danger">New</span> -->
+                 </p>
+               </a>
+             </li>
+
+           </ul>
+         </nav>
+         <!-- /.sidebar-menu -->
+         @endrole
+
+       </div>
