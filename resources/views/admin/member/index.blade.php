@@ -1,5 +1,7 @@
 @extends('admin-lte/app')
 @section('title', 'Data Member')
+@section('list-member', 'active')
+@section('main', 'menu-open')
 @section('content')
 
 <div class="row">

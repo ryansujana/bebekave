@@ -27,7 +27,7 @@ class PesanController extends Controller
      */
     public function index($id)
     {
-        
+
         $telur = Telur::where('id', $id)->first();
 
         return view('pesan.index', compact('telur'));
@@ -155,6 +155,13 @@ class PesanController extends Controller
 
         Alert::success('Pesanan Berhasil Check Out, silahkan lanjutkan Proses Pembayaran', 'Success');
         return redirect('history/'.$pesanan_id);
+    }
+
+    public function laporan_transaksi()
+    {
+        $pesanan_details = PesananDetail::select()->latest()->simplePaginate(5);
+
+        return view('laporantransaksi.index', compact('pesanan_details'));
     }
 
     public function create()

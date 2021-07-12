@@ -14,59 +14,59 @@
         <!-- Main Sidebar Container -->
         @include('admin-lte/sidebar')
         <!-- /.sidebar -->
-        </aside>
+    </aside>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>@yield('title')</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="{{ route('beranda') }}">Home</a></li>
-                                <li class="breadcrumb-item active">@yield('title')</li>
-                            </ol>
-                        </div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>@yield('title')</h1>
                     </div>
-                </div><!-- /.container-fluid -->
-            </section>
-
-            <!-- Main content -->
-            <section class="content-header">
-                <div class="container-fluid">
-
-                    <!-- Default box -->
-
-                    @yield('content')
-                    <!-- /.card -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('beranda') }}">Beranda</a></li>
+                            <li class="breadcrumb-item active">@yield('title')</li>
+                        </ol>
+                    </div>
                 </div>
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
+            </div><!-- /.container-fluid -->
+        </section>
 
-        <!-- Footer -->
-        @include('admin-lte/footer')
-        <!-- EndFooter -->
+        <!-- Main content -->
+        <section class="content-header">
+            <div class="container-fluid">
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+                <!-- Default box -->
+
+                @yield('content')
+                <!-- /.card -->
+            </div>
+        </section>
+        <!-- /.content -->
     </div>
-    <!-- ./wrapper -->
+    <!-- /.content-wrapper -->
+
+    <!-- Footer -->
+    @include('admin-lte/footer')
+    <!-- EndFooter -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
 
 
-    <!-- JS -->
-    @include('admin-lte/js')
-    <!-- End JS -->
+<!-- JS -->
+@include('admin-lte/js')
+<!-- End JS -->
 
-
+@include('sweetalert::alert')
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 @extends('admin-lte/app')
 @section('title', 'Data Produk')
+@section('produk', 'menu-open')
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -30,7 +31,7 @@
                         <tr>
                             <th>Nama</th>
                             <th>Gambar</th>
-                            <th>Harga</th>
+                            <th>Harga /Kg</th>
                             <th>Stok</th>
                             <th>Keterangan</th>
                             <th>Aksi</th>
@@ -50,7 +51,11 @@
                             <td>
                                 <a href="/produk/{{ $telur->id }}/edit" class="btn btn-warning btn-sm"><i
                                     class="fas fa-edit"></i> Edit</a>
+                                    <a href="/produk/{{ $telur->id }}/delete"
+                                        class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus');"><i class="fa fa-trash"></i> Delete</a>
+                                    </td>
                                 </td>
+
                             </tr>
                             @endforeach
                         </tbody>
@@ -78,21 +83,20 @@
                         @csrf
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama</label>
-                            <input type="text" name="nama_telur" class="form-control" id="nama_telur" placeholder="Nama">
+                            <input type="text" name="nama_telur" class="form-control" value="{{ old('nama_telur') }}" id="nama_telur" placeholder="Nama">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Harga</label>
-                            <input type="number" name="harga" class="form-control" id="harga" placeholder="Harga">
+                            <input type="number" name="harga" class="form-control" value="{{ old('harga') }}" id="harga" placeholder="Harga">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Stok</label>
-                            <input type="number" name="stok" class="form-control" id="stok" placeholder="Stok">
+                            <input type="number" name="stok" class="form-control" id="stok" value="{{ old('stok') }}" placeholder="Stok">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Keterangan</label>
-                            <input type="text" name="keterangan" class="form-control" id="keterangan"
-                            placeholder="keterangan">
+                            <textarea name="keterangan" class="form-control" id="keterangan">{{ old('keterangan') }}</textarea>
                         </div>
 
                         <div class="form-group">

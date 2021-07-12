@@ -10,6 +10,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PenetasanController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MembersController;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 /*
@@ -38,6 +39,7 @@ Route::get('/gallery', [UtamaController::class, 'gallery']);
 
 Route::get('/cek-role', function (){
 	if(auth()->user()->hasRole('admin')){
+		Alert::success('Selamat datang admin', 'Success');
 		return redirect('/beranda');
 	}else{
 		return redirect('/');
@@ -65,10 +67,20 @@ Route::group(['middleware' => ['auth', 'role:member']], function(){
 Route::group(['middleware' => ['auth']], function(){
 	Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 	Route::resource('/produk', ProdukController::class);
+	Route::get('/produk/{id}/delete', [ProdukController::class, 'delete']);
 	Route::resource('/penetasan', PenetasanController::class);
+
 	//users
 	Route::resource('/list-admin', AdminController::class);
 	Route::resource('/list-member', MembersController::class);
+
+	//stok-produk
+	Route::get('/stok-produk', [ProdukController::class, 'stok']);
+	Route::get('/stok-produk/{id}/editstok', [ProdukController::class, 'stok_edit']);
+	Route::post('/stok-produk/{id}', [ProdukController::class, 'update_stok']);
+
+	//Laporan
+	Route::get('laporan-transaksi', [PesanController::class, 'laporan_transaksi']);
 
 });
 

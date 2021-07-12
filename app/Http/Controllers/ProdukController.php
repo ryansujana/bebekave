@@ -7,11 +7,12 @@ use App\Models\Telur;
 use App\Models\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdukController extends Controller
 {
 
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -60,6 +61,8 @@ class ProdukController extends Controller
             'keterangan' => $request->keterangan,
             'gambar' => $gambar
         ]);
+
+        Alert::success('Produk berhasil ditambahkan', 'Success');
         return redirect('/produk');
     }
 
@@ -97,7 +100,7 @@ class ProdukController extends Controller
     {
         $request->validate([
             'nama_telur' => 'required',
-            'gambar' => 'required|mimes:jpg,jpeg,png', //ekstensi
+            'gambar' => 'mimes:jpg,jpeg,png', //ekstensi
             'harga' => 'required',
             'stok' => 'required',
             'keterangan' => 'required',
@@ -123,17 +126,49 @@ class ProdukController extends Controller
         }
         $telurs->update($data);
 
+        Alert::success('Produk berhasil diupdate', 'Success');
         return redirect('/produk');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $telurs = Telur::select('id')->whereId($id)->firstOrFail();
+        $telurs->delete();
+
+        Alert::success('Produk berhasil dihapus', 'Success');
+        return redirect('/produk');
+    }
+
+    public function stok()
+    {
+        $telurs = Telur::select()->latest()->simplePaginate(10);
+        return view('admin/produk/stok', compact('telurs'));
+    }
+
+    public function stok_edit($id)
+    {
+        $telurs = Telur::select('id','stok')->whereId($id)->firstOrfail();
+        return view('admin/produk/editstok', compact('telurs'));
+    }
+
+    public function update_stok(Request $request, $id)
+    {
+        $request->validate([
+            'stok' => 'required',
+
+        ]);
+
+        $data = [
+            'stok' => $request->stok,
+            'user_id' => Auth::user()->id
+
+        ];
+
+        $telurs = Telur::select('id')->whereId($id)->first();
+
+        $telurs->update($data);
+
+        Alert::success('Stok berhasil diupdate', 'Success');
+        return redirect('/stok-produk');
     }
 }

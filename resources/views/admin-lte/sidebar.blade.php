@@ -37,15 +37,15 @@
        data-accordion="false">
                  <!-- Add icons to the links using the .nav-icon class
                    with font-awesome or any other icon font library -->
-                   <li class="nav-item">
-                     <a href="/beranda" class="nav-link">
+                   <li class="@yield('beranda') nav-item">
+                     <a href="{{ url('beranda') }}" class="nav-link">
                        <i class="nav-icon fas fa-tachometer-alt"></i>
                        <p>
                          Beranda
                        </p>
                      </a>
                    </li>
-                   <li class="nav-item">
+                   <li class="@yield('produk') nav-item">
                      <a href="{{ url('produk') }}" class="nav-link">
                        <i class="nav-icon fas fa-th"></i>
                        <p>
@@ -54,7 +54,7 @@
                        </p>
                      </a>
                    </li>
-                   <li class="nav-item">
+                   <li class="@yield('penetasan') nav-item">
                      <a href="{{ url('penetasan') }}" class="nav-link">
                        <i class="nav-icon fas fa-th"></i>
                        <p>
@@ -65,90 +65,90 @@
                    </li>
 
                    <li class="nav-header">Master Data</li>
-                   <li class="nav-item">
-                     <a href="#" class="nav-link">
-                       <i class="nav-icon fas fa-users"></i>
-                       <p>
-                         Data User
-                         <i class="right fas fa-angle-left"></i>
-                       </p>
-                     </a>
-                     <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="{{ url('list-admin') }}" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Data Admin</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="{{ url('list-member') }}" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Data Member</p>
-                        </a>
-                      </li>
-
-                    </ul>
-                  </li>
-
-                  <li class="nav-item">
-                   <a href="../widgets.html" class="nav-link">
-                     <i class="nav-icon fas fa-edit"></i>
-                     <p>
-                       Data Stok Produk
-                       <!-- <span class="right badge badge-danger">New</span> -->
-                     </p>
-                   </a>
-                 </li>
-
-                 <li class="nav-header">Laporan</li>
-                 <li class="nav-item">
-                   <a href="../widgets.html" class="nav-link">
+                   <li class="nav-item @yield('main')">
+                    <a href="#" class="nav-link">
                      <i class="nav-icon fas fa-users"></i>
                      <p>
-                       Laporan Transaksi
-                       <!-- <span class="right badge badge-danger">New</span> -->
+                       Data User
+                       <i class="right fas fa-angle-left"></i>
                      </p>
                    </a>
-                 </li>
+                   <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                      <a href="{{ url('list-admin') }}" class="nav-link @yield('list-admin')">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Admin</p>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{{ url('list-member') }}" class="nav-link @yield('list-member')">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Data Member</p>
+                      </a>
+                    </li>
 
-                 <li class="nav-item">
-                   <a href="../widgets.html" class="nav-link">
-                     <i class="nav-icon fas fa-edit"></i>
-                     <p>
-                       Laporan Stok
-                       <!-- <span class="right badge badge-danger">New</span> -->
-                     </p>
-                   </a>
-                 </li>
-
-                 <li class="nav-header">Auth User</li>
-                 <li class="nav-item">
-                  <a href="{{ url('/') }}" class="nav-link">
-                    <i class="nav-icon fas fa-home"></i>
-                    <p>
-                      Halaman Utama
-                      <!-- <span class="right badge badge-danger">New</span> -->
-                    </p>
-                  </a>
+                  </ul>
                 </li>
-                <li class="nav-item">
-                 <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
-                 document.getElementById('logout-form').submit();">
 
-                 <i class="nav-icon fas fa-door-open"></i>
-                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                   @csrf
-                 </form>
-                 <p>
-                   Logout
-                   <!-- <span class="right badge badge-danger">New</span> -->
-                 </p>
-               </a>
-             </li>
+                <li class="nav-item @yield('stok-produk')">
+                  <a href="{{ url('stok-produk') }}" class="nav-link">
+                   <i class="nav-icon fas fa-edit"></i>
+                   <p>
+                     Data Stok Produk
+                     <!-- <span class="right badge badge-danger">New</span> -->
+                   </p>
+                 </a>
+               </li>
 
-           </ul>
-         </nav>
-         <!-- /.sidebar-menu -->
-         @endrole
+               <li class="nav-header">Laporan</li>
+               <li class="nav-item @yield('laporan-transaksi')">
+                 <a href="{{ url('laporan-transaksi') }}" class="nav-link">
+                   <i class="nav-icon fas fa-users"></i>
+                   <p>
+                     Laporan Transaksi
+                     <!-- <span class="right badge badge-danger">New</span> -->
+                   </p>
+                 </a>
+               </li>
 
-       </div>
+               <li class="nav-item">
+                 <a href="../widgets.html" class="nav-link">
+                   <i class="nav-icon fas fa-edit"></i>
+                   <p>
+                     Laporan Stok
+                     <!-- <span class="right badge badge-danger">New</span> -->
+                   </p>
+                 </a>
+               </li>
+
+               <li class="nav-header">Auth User</li>
+               <li class="nav-item">
+                <a href="{{ url('/') }}" class="nav-link">
+                  <i class="nav-icon fas fa-home"></i>
+                  <p>
+                    Halaman Utama
+                    <!-- <span class="right badge badge-danger">New</span> -->
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+               <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+               document.getElementById('logout-form').submit();">
+
+               <i class="nav-icon fas fa-door-open"></i>
+               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                 @csrf
+               </form>
+               <p>
+                 Logout
+                 <!-- <span class="right badge badge-danger">New</span> -->
+               </p>
+             </a>
+           </li>
+
+         </ul>
+       </nav>
+       <!-- /.sidebar-menu -->
+       @endrole
+
+     </div>
