@@ -41,13 +41,15 @@
                     <a class="nav-link" href="{{ url('profil') }}">Profil</a>
                     <a class="nav-link" href="{{ url('kontak') }}">Kontak</a>
                     <a class="nav-link" href="{{ url('gallery') }}">Gallery</a>
+
                     @role('member')
-                    <a class="nav-link" href="{{ url('home') }}">Belanja ( Wajib Login )</a>
+                    <a class="nav-link" href="{{ url('home') }}">Belanja</a>
                     @endrole
                 </div>
             </div>
         </div>
     </nav>
+
 
     <div class="container">
         @yield('content')

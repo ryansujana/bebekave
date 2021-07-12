@@ -30,7 +30,15 @@
         </div>
         @endif
 
-        
+        @if (Route::has('login'))
+        @auth
+
+        @else
+        <h5>Login member untuk memulai berbelanja <i class="fa fa-shopping-cart"></i></h5>
+        @endauth
+        @endif
+
+
         <div class="banner">
             <img src="{{ url('assets/banner/bann1.png') }}" alt="">
         </div>
