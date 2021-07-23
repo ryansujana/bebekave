@@ -34,15 +34,19 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [UtamaController::class, 'index']);
 Route::get('/profil', [UtamaController::class, 'profil']);
-Route::get('/kontak', [UtamaController::class, 'kontak']);
+Route::get('/kontak', [UtamaController::class, 'kontak']);// functionnya 'kontak'
 Route::get('/gallery', [UtamaController::class, 'gallery']);
 
-Route::get('/cek-role', function (){
+// Ini proses atau logika untuk ke login atau /login
+Route::get('/cek-role', function (){  // cek-role berada di controller LoginController->routeserviceprovider=CEKROLE, CEKROLE artinya sama dengan /cek-role
+	//Jika auth usernya sebagai Admin
 	if(auth()->user()->hasRole('admin')){
+		// Maka akan ke:
 		Alert::success('Selamat datang admin', 'Success');
 		return redirect('/beranda');
 	}else{
-		return redirect('/');
+		// kalau bukan admin, loginnya sebagai member, maka
+		return redirect('/'); //ini halaman awal
 	}
 });
 
@@ -81,6 +85,10 @@ Route::group(['middleware' => ['auth']], function(){
 
 	//Laporan
 	Route::get('laporan-transaksi', [PesanController::class, 'laporan_transaksi']);
+	Route::get('laporan-transaksi/{tglawal}/{tglakhir}', [PesanController::class, 'tampildatakeseluruhan']);
+
+	//Filter Date
+	// Route::get('filter-data', [PesanController::class, 'halamanrekap'])->name('filter-data');
 
 });
 

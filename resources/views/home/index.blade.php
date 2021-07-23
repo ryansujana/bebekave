@@ -110,7 +110,7 @@
     <div class="col-md-12">
         <h3>Kami hadir untuk anda</h3>
     </div>
-    <div class="row">
+    <div class="row text-center" style="padding: 20px;">
         <div class="col-md-6 mt-2">
             <img src="{{ url('assets/banner/hadir.jpg') }}" width="100%" alt="">
         </div>
@@ -120,4 +120,5 @@
     </div>
 </div>
 </div>
+
 @endsection

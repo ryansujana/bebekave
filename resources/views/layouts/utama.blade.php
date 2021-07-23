@@ -53,10 +53,33 @@
 
     <div class="container">
         @yield('content')
+
+
+        <!-- Footer Sementara  -->
+        <!-- Nanti dibuat Tabelnya : diadakan pengaturan langsung oleh admin -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-home">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="kontak text-center">
+                                <h3>Kontak Kami</h3>
+                                No Hp / WA : 082218228291
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="gallery text-center">
+                                <h3>Gallery</h3>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    
 </div>
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">

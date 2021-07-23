@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        //kenapa yang alamat dan lain" tidak dimasukan, karena tidak wajib/harus pakai NULL
     ];
 
     /**

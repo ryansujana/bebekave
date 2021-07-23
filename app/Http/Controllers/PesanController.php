@@ -164,6 +164,13 @@ class PesanController extends Controller
         return view('laporantransaksi.index', compact('pesanan_details'));
     }
 
+    public function tampildatakeseluruhan($tglawal, $tglakhir)
+    {
+        $pesanan = Pesanan::all();
+        $pesanan_details = PesananDetail::with('user')->whereBetween('tanggal', $pesanan->tanggal,[$tglawal, $tglakhir])->orderBy('tanggal', 'asc')->get();
+        return view('laporantransaksi.index', compact('pesanan_details', 'pesanan'));
+    }
+
     public function create()
     {
         //

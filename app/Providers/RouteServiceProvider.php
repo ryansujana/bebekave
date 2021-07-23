@@ -17,7 +17,10 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    //ini yang tidak pakai login, atau sekedar melihat halaman saja
     public const HOME = '/';
+
+    //kalau yang ini khusus yang untuk yang login, apakah mau login sebagai admin atau sebagai member
     public const CEKROLE = '/cek-role';
 
     /**
